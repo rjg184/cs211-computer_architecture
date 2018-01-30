@@ -1,0 +1,179 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf470
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww14160\viewh18000\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 30\
+\
+Breakpoint 1, 0x08048fec in phase_8 ()\
+Missing separate debuginfos, use: debuginfo-install glibc-2.17-106.el7_2.8.i686\
+(gdb) disas\
+Dump of assembler code for function phase_8:\
+=> 0x08048fec <+0>:	push   %esi\
+   0x08048fed <+1>:	push   %ebx\
+   0x08048fee <+2>:	sub    $0x44,%esp\
+   0x08048ff1 <+5>:	lea    0x10(%esp),%eax\
+   0x08048ff5 <+9>:	mov    %eax,0x4(%esp)\
+   0x08048ff9 <+13>:	mov    0x50(%esp),%eax\
+   0x08048ffd <+17>:	mov    %eax,(%esp)\
+   0x08049000 <+20>:	call   0x8049554 <read_six_numbers>\
+   0x08049005 <+25>:	mov    $0x0,%esi\
+   0x0804900a <+30>:	mov    0x10(%esp,%esi,4),%eax\
+   0x0804900e <+34>:	sub    $0x1,%eax\
+   0x08049011 <+37>:	cmp    $0x5,%eax\
+   0x08049014 <+40>:	jbe    0x804901b <phase_8+47>\
+   0x08049016 <+42>:	call   0x8049515 <explode_bomb>\
+   0x0804901b <+47>:	add    $0x1,%esi\
+   0x0804901e <+50>:	cmp    $0x6,%esi\
+   0x08049021 <+53>:	jne    0x804902a <phase_8+62>\
+   0x08049023 <+55>:	mov    $0x0,%ebx\
+   0x08049028 <+60>:	jmp    0x8049063 <phase_8+119>\
+   0x0804902a <+62>:	mov    %esi,%ebx\
+   0x0804902c <+64>:	mov    0x10(%esp,%ebx,4),%eax\
+   0x08049030 <+68>:	cmp    %eax,0xc(%esp,%esi,4)\
+   0x08049034 <+72>:	jne    0x804903b <phase_8+79>\
+   0x08049036 <+74>:	call   0x8049515 <explode_bomb>\
+   0x0804903b <+79>:	add    $0x1,%ebx\
+   0x0804903e <+82>:	cmp    $0x5,%ebx\
+   0x08049041 <+85>:	jle    0x804902c <phase_8+64>\
+   0x08049043 <+87>:	jmp    0x804900a <phase_8+30>\
+   0x08049045 <+89>:	mov    0x8(%edx),%edx\
+   0x08049048 <+92>:	add    $0x1,%eax\
+   0x0804904b <+95>:	cmp    %ecx,%eax\
+   0x0804904d <+97>:	jne    0x8049045 <phase_8+89>\
+   0x0804904f <+99>:	nop\
+   0x08049050 <+100>:	jmp    0x8049057 <phase_8+107>\
+   0x08049052 <+102>:	mov    $0x804d174,%edx\
+   0x08049057 <+107>:	mov    %edx,0x28(%esp,%esi,4)\
+   0x0804905b <+111>:	add    $0x1,%ebx\
+   0x0804905e <+114>:	cmp    $0x6,%ebx\
+   0x08049061 <+117>:	je     0x804907a <phase_8+142>\
+   0x08049063 <+119>:	mov    %ebx,%esi\
+   0x08049065 <+121>:	mov    0x10(%esp,%ebx,4),%ecx\
+---Type <return> to continue, or q <return> to quit---\
+   0x08049069 <+125>:	cmp    $0x1,%ecx\
+   0x0804906c <+128>:	jle    0x8049052 <phase_8+102>\
+   0x0804906e <+130>:	mov    $0x1,%eax\
+   0x08049073 <+135>:	mov    $0x804d174,%edx\
+   0x08049078 <+140>:	jmp    0x8049045 <phase_8+89>\
+   0x0804907a <+142>:	mov    0x28(%esp),%ebx\
+   0x0804907e <+146>:	lea    0x2c(%esp),%eax\
+   0x08049082 <+150>:	lea    0x40(%esp),%esi\
+   0x08049086 <+154>:	mov    %ebx,%ecx\
+   0x08049088 <+156>:	mov    (%eax),%edx\
+   0x0804908a <+158>:	mov    %edx,0x8(%ecx)\
+   0x0804908d <+161>:	add    $0x4,%eax\
+   0x08049090 <+164>:	cmp    %esi,%eax\
+   0x08049092 <+166>:	je     0x8049098 <phase_8+172>\
+   0x08049094 <+168>:	mov    %edx,%ecx\
+   0x08049096 <+170>:	jmp    0x8049088 <phase_8+156>\
+   0x08049098 <+172>:	movl   $0x0,0x8(%edx)\
+   0x0804909f <+179>:	mov    $0x5,%esi\
+   0x080490a4 <+184>:	mov    0x8(%ebx),%eax\
+   0x080490a7 <+187>:	mov    (%eax),%eax\
+   0x080490a9 <+189>:	cmp    %eax,(%ebx)\
+   0x080490ab <+191>:	jge    0x80490b2 <phase_8+198>\
+   0x080490ad <+193>:	call   0x8049515 <explode_bomb>\
+   0x080490b2 <+198>:	mov    0x8(%ebx),%ebx\
+   0x080490b5 <+201>:	sub    $0x1,%esi\
+   0x080490b8 <+204>:	jne    0x80490a4 <phase_8+184>\
+   0x080490ba <+206>:	add    $0x44,%esp\
+   0x080490bd <+209>:	pop    %ebx\
+   0x080490be <+210>:	pop    %esi\
+   0x080490bf <+211>:	ret    \
+End of assembler dump.\
+\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+\
+(gdb) x/3x $ebx\
+0x804d174 <node1>:	0x92	0x00	0x00\
+(gdb) x/3x *($ebx + 8)\
+0x804d180 <node2>:	0xd4	0x01	0x00\
+(gdb) x/3x *(*($ebx + 8) + 8)\
+0x804d18c <node3>:	0x64	0x01	0x00\
+(gdb) x/3x *(*(*($ebx + 8) + 8) + 8)\
+0x804d198 <node4>:	0x1a	0x02	0x00\
+(gdb) x/3x *(*(*(*($ebx + 8) + 8) + 8) + 8)\
+0x804d1a4 <node5>:	0x10	0x01	0x00\
+(gdb) x/3x *(*(*(*(*($ebx + 8) + 8) + 8) + 8) + 8)\
+0x804d1b0 <node6>:	0xc0	0x02	0x00\
+\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+\
+-> Input: 5 4 3 1 6 2\
+\
+Node 5: 16\
+Node 4: 26\
+Node 3: 100\
+Node 1: 146\
+Node 6: 192\
+Node 2: 212\
+\
+(gdb) i r\
+eax            0x21a	538\
+ecx            0x804d1b0	134533552\
+edx            0x804d180	134533504\
+ebx            0x804d1a4	134533540\
+esp            0xffffcc20	0xffffcc20\
+ebp            0xffffcc88	0xffffcc88\
+esi            0x5	5\
+edi            0x0	0\
+eip            0x80490a9	0x80490a9 <phase_8+189>\
+eflags         0x246	[ PF ZF IF ]\
+cs             0x23	35\
+ss             0x2b	43\
+ds             0x2b	43\
+es             0x2b	43\
+fs             0x0	0\
+gs             0x63	99\
+(gdb) x/3x $ebx\
+0x804d1a4 <node5>:	0x00000110	0x00000005	0x0804d198\
+(gdb) x/3x *($ebx + 8)\
+0x804d198 <node4>:	0x0000021a	0x00000004	0x0804d18c\
+(gdb) x/3x *(*($ebx + 8) + 8)\
+0x804d18c <node3>:	0x00000164	0x00000003	0x0804d174\
+(gdb) x/3x *(*(*($ebx + 8) + 8) + 8)\
+0x804d174 <node1>:	0x00000092	0x00000001	0x0804d1b0\
+(gdb) x/3x *(*(*(*($ebx + 8) + 8) + 8) + 8)\
+0x804d1b0 <node6>:	0x000002c0	0x00000006	0x0804d180\
+(gdb) x/3x *(*(*(*(*($ebx + 8) + 8) + 8) + 8) + 8)\
+0x804d180 <node2>:	0x000001d4	0x00000002	0x00000000\
+(gdb) \
+\
+\'97\'97\'97\'97\'97\
+\
+1: 146\
+5: 272\
+3: 356\
+2: 468\
+4: 538\
+6: 704\
+\
+End of assembler dump.\
+(gdb) x/3x $ebx\
+0x804d174 <node1>:	0x00000092	0x00000001	0x0804d1a4\
+(gdb) x/3x *($ebx + 8)\
+0x804d1a4 <node5>:	0x00000110	0x00000005	0x0804d18c\
+(gdb) x/3x *(*($ebx + 8) + 8)\
+0x804d18c <node3>:	0x00000164	0x00000003	0x0804d180\
+(gdb) x/3x *(*(*($ebx + 8) + 8) + 8)\
+0x804d180 <node2>:	0x000001d4	0x00000002	0x0804d198\
+(gdb) x/3x *(*(*(*($ebx + 8) + 8) + 8) + 8)\
+0x804d198 <node4>:	0x0000021a	0x00000004	0x0804d1b0\
+(gdb) x/3x *(*(*(*(*($ebx + 8) + 8) + 8) + 8) + 8)\
+0x804d1b0 <node6>:	0x000002c0	0x00000006	0x00000000\
+(gdb) \
+\
+*** LARGEST TO SMALLEST SO ANSWER IS:\
+6: 704\
+4: 538\
+2: 468\
+3: 356\
+5: 272\
+1: 146\
+\
+\
+\
+\
+}

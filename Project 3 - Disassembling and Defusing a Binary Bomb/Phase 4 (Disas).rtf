@@ -1,0 +1,932 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf470
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww28600\viewh18000\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 That's number 2.  Keep going!\
+He is evil and fits easily into most overhead storaga bins.\
+One step closer.\
+1 2 3 4 5 6\
+\
+Breakpoint 1, 0x08048d8b in phase_4 ()\
+Missing separate debuginfos, use: debuginfo-install glibc-2.17-106.el7_2.8.i686\
+(gdb) disas\
+Dump of assembler code for function phase_4:\
+=> 0x08048d8b <+0>:	push   %esi\
+   0x08048d8c <+1>:	push   %ebx\
+   0x08048d8d <+2>:	sub    $0x34,%esp\
+   0x08048d90 <+5>:	lea    0x18(%esp),%eax\
+   0x08048d94 <+9>:	mov    %eax,0x4(%esp)\
+   0x08048d98 <+13>:	mov    0x40(%esp),%eax\
+   0x08048d9c <+17>:	mov    %eax,(%esp)\
+   0x08048d9f <+20>:	call   0x8049554 <read_six_numbers>\
+   0x08048da4 <+25>:	cmpl   $0x1,0x18(%esp)			<\'97 1st number is 1\
+   0x08048da9 <+30>:	je     0x8048dca <phase_4+63>\
+   0x08048dab <+32>:	call   0x8049515 <explode_bomb>	<\'97 EXPLODES if 1st number is NOT 1\
+   0x08048db0 <+37>:	jmp    0x8048dca <phase_4+63>\
+   0x08048db2 <+39>:	mov    -0x4(%ebx),%eax			<\'97 eax = 1 \'97> b/c of this line, eax = 1\
+   0x08048db5 <+42>:	shl    $0x2,%eax				<\'97 2^2 = 4 * eax = 4 * 1 = 4 \'97> eax = 4    \'97 *** each time it multiplies eax by 4 ***\
+   0x08048db8 <+45>:	cmp    %eax,(%ebx)				<\'97 eax = 4, ebx = 2 (ebx is our 2nd input)\
+   0x08048dba <+47>:	je     0x8048dc1 <phase_4+54>\
+   0x08048dbc <+49>:	call   0x8049515 <explode_bomb>\
+   0x08048dc1 <+54>:	add    $0x4,%ebx\
+   0x08048dc4 <+57>:	cmp    %esi,%ebx\
+   0x08048dc6 <+59>:	jne    0x8048db2 <phase_4+39>\
+   0x08048dc8 <+61>:	jmp    0x8048dd4 <phase_4+73>\
+   0x08048dca <+63>:	lea    0x1c(%esp),%ebx			<\'97 ebx = 2\
+   0x08048dce <+67>:	lea    0x30(%esp),%esi			<\'97 esi = 36\
+   0x08048dd2 <+71>:	jmp    0x8048db2 <phase_4+39>		<\'97 JUMP TO LINE +39\
+   0x08048dd4 <+73>:	add    $0x34,%esp\
+   0x08048dd7 <+76>:	pop    %ebx\
+   0x08048dd8 <+77>:	pop    %esi\
+   0x08048dd9 <+78>:	ret    \
+End of assembler dump.\
+(gdb) \
+\
+\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+\
+0x08049599 in read_six_numbers ()\
+(gdb) disas\
+Dump of assembler code for function read_six_numbers:\
+   0x08049554 <+0>:	sub    $0x2c,%esp\
+   0x08049557 <+3>:	mov    0x34(%esp),%eax\
+   0x0804955b <+7>:	lea    0x14(%eax),%edx\
+   0x0804955e <+10>:	mov    %edx,0x1c(%esp)\
+   0x08049562 <+14>:	lea    0x10(%eax),%edx\
+   0x08049565 <+17>:	mov    %edx,0x18(%esp)\
+   0x08049569 <+21>:	lea    0xc(%eax),%edx\
+   0x0804956c <+24>:	mov    %edx,0x14(%esp)\
+   0x08049570 <+28>:	lea    0x8(%eax),%edx\
+   0x08049573 <+31>:	mov    %edx,0x10(%esp)\
+   0x08049577 <+35>:	lea    0x4(%eax),%edx\
+   0x0804957a <+38>:	mov    %edx,0xc(%esp)\
+   0x0804957e <+42>:	mov    %eax,0x8(%esp)\
+   0x08049582 <+46>:	movl   $0x804a7a9,0x4(%esp)\
+   0x0804958a <+54>:	mov    0x30(%esp),%eax\
+   0x0804958e <+58>:	mov    %eax,(%esp)\
+   0x08049591 <+61>:	call   0x8048900 <__isoc99_sscanf@plt>\
+   0x08049596 <+66>:	cmp    $0x5,%eax\
+=> 0x08049599 <+69>:	jg     0x80495a0 <read_six_numbers+76>\
+   0x0804959b <+71>:	call   0x8049515 <explode_bomb>\
+   0x080495a0 <+76>:	add    $0x2c,%esp\
+   0x080495a3 <+79>:	ret    \
+End of assembler dump.\
+(gdb) i r\
+eax            0x6	6\
+ecx            0x0	0\
+edx            0x0	0\
+ebx            0xffffcd24	-13020\
+esp            0xffffcc00	0xffffcc00\
+ebp            0xffffcc88	0xffffcc88\
+esi            0x0	0\
+edi            0x0	0\
+eip            0x8049599	0x8049599 <read_six_numbers+69>\
+eflags         0x202	[ IF ]\
+cs             0x23	35\
+ss             0x2b	43\
+ds             0x2b	43\
+es             0x2b	43\
+fs             0x0	0\
+gs             0x63	99\
+(gdb) x/s $eax\
+0x6:	<Address 0x6 out of bounds>\
+(gdb) x/d $eax\
+0x6:	Cannot access memory at address 0x6\
+(gdb) x/d 0x804a7a9\
+0x804a7a9:	37\
+(gdb) x/s 0x804a7a9\
+0x804a7a9:	"%d %d %d %d %d %d"\
+(gdb) i r\
+eax            0x6	6\
+ecx            0x0	0\
+edx            0x0	0\
+ebx            0xffffcd24	-13020\
+esp            0xffffcc00	0xffffcc00\
+ebp            0xffffcc88	0xffffcc88\
+esi            0x0	0\
+edi            0x0	0\
+eip            0x8049599	0x8049599 <read_six_numbers+69>\
+eflags         0x202	[ IF ]\
+cs             0x23	35\
+ss             0x2b	43\
+ds             0x2b	43\
+es             0x2b	43\
+fs             0x0	0\
+gs             0x63	99\
+(gdb) \
+\
+\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+\
+[rjg184@utility rjg184]$ cd assignment3\
+[rjg184@utility assignment3]$ cd bomb178\
+[rjg184@utility bomb178]$ ls\
+bomb  bomb-assembly.txt  bomb.c  bomb-strings.txt  defuser.txt  README\
+[rjg184@utility bomb178]$ gdb bomb\
+GNU gdb (GDB) Red Hat Enterprise Linux 7.6.1-80.el7\
+Copyright (C) 2013 Free Software Foundation, Inc.\
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>\
+This is free software: you are free to change and redistribute it.\
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"\
+and "show warranty" for details.\
+This GDB was configured as "x86_64-redhat-linux-gnu".\
+For bug reporting instructions, please see:\
+<http://www.gnu.org/software/gdb/bugs/>...\
+Reading symbols from /.autofs/ilab/ilab_users/rjg184/assignment3/bomb178/bomb...done.\
+(gdb) break phase_4\
+Breakpoint 1 at 0x8048d8b\
+(gdb) run\
+Starting program: /.autofs/ilab/ilab_users/rjg184/assignment3/bomb178/bomb \
+Welcome to my fiendish little bomb. You have 9 phases with\
+which to blow yourself up. Have a nice day!\
+870\
+Phase 1 defused. How about the next one?\
+I turned the moon into something I call a Death Star.\
+That's number 2.  Keep going!\
+He is evil and fits easily into most overhead storaga bins.\
+One step closer.\
+1 2 3 4 5 6\
+\
+Breakpoint 1, 0x08048d8b in phase_4 ()\
+Missing separate debuginfos, use: debuginfo-install glibc-2.17-106.el7_2.8.i686\
+(gdb) disas\
+Dump of assembler code for function phase_4:\
+=> 0x08048d8b <+0>:	push   %esi\
+   0x08048d8c <+1>:	push   %ebx\
+   0x08048d8d <+2>:	sub    $0x34,%esp\
+   0x08048d90 <+5>:	lea    0x18(%esp),%eax\
+   0x08048d94 <+9>:	mov    %eax,0x4(%esp)\
+   0x08048d98 <+13>:	mov    0x40(%esp),%eax\
+   0x08048d9c <+17>:	mov    %eax,(%esp)\
+   0x08048d9f <+20>:	call   0x8049554 <read_six_numbers>\
+   0x08048da4 <+25>:	cmpl   $0x1,0x18(%esp)\
+   0x08048da9 <+30>:	je     0x8048dca <phase_4+63>\
+   0x08048dab <+32>:	call   0x8049515 <explode_bomb>\
+   0x08048db0 <+37>:	jmp    0x8048dca <phase_4+63>\
+   0x08048db2 <+39>:	mov    -0x4(%ebx),%eax\
+   0x08048db5 <+42>:	shl    $0x2,%eax\
+   0x08048db8 <+45>:	cmp    %eax,(%ebx)\
+   0x08048dba <+47>:	je     0x8048dc1 <phase_4+54>\
+   0x08048dbc <+49>:	call   0x8049515 <explode_bomb>\
+   0x08048dc1 <+54>:	add    $0x4,%ebx\
+   0x08048dc4 <+57>:	cmp    %esi,%ebx\
+   0x08048dc6 <+59>:	jne    0x8048db2 <phase_4+39>\
+   0x08048dc8 <+61>:	jmp    0x8048dd4 <phase_4+73>\
+   0x08048dca <+63>:	lea    0x1c(%esp),%ebx\
+   0x08048dce <+67>:	lea    0x30(%esp),%esi\
+   0x08048dd2 <+71>:	jmp    0x8048db2 <phase_4+39>\
+   0x08048dd4 <+73>:	add    $0x34,%esp\
+   0x08048dd7 <+76>:	pop    %ebx\
+   0x08048dd8 <+77>:	pop    %esi\
+   0x08048dd9 <+78>:	ret    \
+End of assembler dump.\
+(gdb) ni\
+0x08048d8c in phase_4 ()\
+(gdb) ni\
+0x08048d8d in phase_4 ()\
+(gdb) ni\
+0x08048d90 in phase_4 ()\
+(gdb) ni\
+0x08048d94 in phase_4 ()\
+(gdb) ni\
+0x08048d98 in phase_4 ()\
+(gdb) ni\
+0x08048d9c in phase_4 ()\
+(gdb) i r\
+eax            0x804d910	134535440\
+ecx            0xc	12\
+edx            0x4	4\
+ebx            0xffffcd24	-13020\
+esp            0xffffcc30	0xffffcc30\
+ebp            0xffffcc88	0xffffcc88\
+esi            0x0	0\
+edi            0x0	0\
+eip            0x8048d9c	0x8048d9c <phase_4+17>\
+eflags         0x286	[ PF SF IF ]\
+cs             0x23	35\
+ss             0x2b	43\
+ds             0x2b	43\
+es             0x2b	43\
+fs             0x0	0\
+gs             0x63	99\
+(gdb) ni\
+0x08048d9f in phase_4 ()\
+(gdb) i r\
+eax            0x804d910	134535440\
+ecx            0xc	12\
+edx            0x4	4\
+ebx            0xffffcd24	-13020\
+esp            0xffffcc30	0xffffcc30\
+ebp            0xffffcc88	0xffffcc88\
+esi            0x0	0\
+edi            0x0	0\
+eip            0x8048d9f	0x8048d9f <phase_4+20>\
+eflags         0x286	[ PF SF IF ]\
+cs             0x23	35\
+ss             0x2b	43\
+ds             0x2b	43\
+es             0x2b	43\
+fs             0x0	0\
+gs             0x63	99\
+(gdb) x/d $eax\
+0x804d910 <input_strings+240>:	540155953\
+(gdb) x/s $eax\
+0x804d910 <input_strings+240>:	"1 2 3 4 5 6"\
+(gdb) x/s $esp\
+0xffffcc30:	"\\020\\331\\004\\bH\\314\\377\\377 \\274\\372\\367\\224|\\345\\367\\300\\272\\372\\367\\n"\
+(gdb) x/s esp\
+No symbol "esp" in current context.\
+(gdb) x/s %esp\
+A syntax error in expression, near `%esp'.\
+(gdb) x/d $esp\
+0xffffcc30:	16\
+(gdb) disas\
+Dump of assembler code for function phase_4:\
+   0x08048d8b <+0>:	push   %esi\
+   0x08048d8c <+1>:	push   %ebx\
+   0x08048d8d <+2>:	sub    $0x34,%esp\
+   0x08048d90 <+5>:	lea    0x18(%esp),%eax\
+   0x08048d94 <+9>:	mov    %eax,0x4(%esp)\
+   0x08048d98 <+13>:	mov    0x40(%esp),%eax\
+   0x08048d9c <+17>:	mov    %eax,(%esp)\
+=> 0x08048d9f <+20>:	call   0x8049554 <read_six_numbers>\
+   0x08048da4 <+25>:	cmpl   $0x1,0x18(%esp)\
+   0x08048da9 <+30>:	je     0x8048dca <phase_4+63>\
+   0x08048dab <+32>:	call   0x8049515 <explode_bomb>\
+   0x08048db0 <+37>:	jmp    0x8048dca <phase_4+63>\
+   0x08048db2 <+39>:	mov    -0x4(%ebx),%eax\
+   0x08048db5 <+42>:	shl    $0x2,%eax\
+   0x08048db8 <+45>:	cmp    %eax,(%ebx)\
+   0x08048dba <+47>:	je     0x8048dc1 <phase_4+54>\
+   0x08048dbc <+49>:	call   0x8049515 <explode_bomb>\
+   0x08048dc1 <+54>:	add    $0x4,%ebx\
+   0x08048dc4 <+57>:	cmp    %esi,%ebx\
+   0x08048dc6 <+59>:	jne    0x8048db2 <phase_4+39>\
+   0x08048dc8 <+61>:	jmp    0x8048dd4 <phase_4+73>\
+   0x08048dca <+63>:	lea    0x1c(%esp),%ebx\
+   0x08048dce <+67>:	lea    0x30(%esp),%esi\
+   0x08048dd2 <+71>:	jmp    0x8048db2 <phase_4+39>\
+   0x08048dd4 <+73>:	add    $0x34,%esp\
+   0x08048dd7 <+76>:	pop    %ebx\
+   0x08048dd8 <+77>:	pop    %esi\
+   0x08048dd9 <+78>:	ret    \
+End of assembler dump.\
+(gdb) si\
+0x08049554 in read_six_numbers ()\
+(gdb) disas\
+Dump of assembler code for function read_six_numbers:\
+=> 0x08049554 <+0>:	sub    $0x2c,%esp\
+   0x08049557 <+3>:	mov    0x34(%esp),%eax\
+   0x0804955b <+7>:	lea    0x14(%eax),%edx\
+   0x0804955e <+10>:	mov    %edx,0x1c(%esp)\
+   0x08049562 <+14>:	lea    0x10(%eax),%edx\
+   0x08049565 <+17>:	mov    %edx,0x18(%esp)\
+   0x08049569 <+21>:	lea    0xc(%eax),%edx\
+   0x0804956c <+24>:	mov    %edx,0x14(%esp)\
+   0x08049570 <+28>:	lea    0x8(%eax),%edx\
+   0x08049573 <+31>:	mov    %edx,0x10(%esp)\
+   0x08049577 <+35>:	lea    0x4(%eax),%edx\
+   0x0804957a <+38>:	mov    %edx,0xc(%esp)\
+   0x0804957e <+42>:	mov    %eax,0x8(%esp)\
+   0x08049582 <+46>:	movl   $0x804a7a9,0x4(%esp)\
+   0x0804958a <+54>:	mov    0x30(%esp),%eax\
+   0x0804958e <+58>:	mov    %eax,(%esp)\
+   0x08049591 <+61>:	call   0x8048900 <__isoc99_sscanf@plt>\
+   0x08049596 <+66>:	cmp    $0x5,%eax\
+   0x08049599 <+69>:	jg     0x80495a0 <read_six_numbers+76>\
+   0x0804959b <+71>:	call   0x8049515 <explode_bomb>\
+   0x080495a0 <+76>:	add    $0x2c,%esp\
+   0x080495a3 <+79>:	ret    \
+End of assembler dump.\
+(gdb) until *0x08049599\
+0x08049599 in read_six_numbers ()\
+(gdb) disas\
+Dump of assembler code for function read_six_numbers:\
+   0x08049554 <+0>:	sub    $0x2c,%esp\
+   0x08049557 <+3>:	mov    0x34(%esp),%eax\
+   0x0804955b <+7>:	lea    0x14(%eax),%edx\
+   0x0804955e <+10>:	mov    %edx,0x1c(%esp)\
+   0x08049562 <+14>:	lea    0x10(%eax),%edx\
+   0x08049565 <+17>:	mov    %edx,0x18(%esp)\
+   0x08049569 <+21>:	lea    0xc(%eax),%edx\
+   0x0804956c <+24>:	mov    %edx,0x14(%esp)\
+   0x08049570 <+28>:	lea    0x8(%eax),%edx\
+   0x08049573 <+31>:	mov    %edx,0x10(%esp)\
+   0x08049577 <+35>:	lea    0x4(%eax),%edx\
+   0x0804957a <+38>:	mov    %edx,0xc(%esp)\
+   0x0804957e <+42>:	mov    %eax,0x8(%esp)\
+   0x08049582 <+46>:	movl   $0x804a7a9,0x4(%esp)\
+   0x0804958a <+54>:	mov    0x30(%esp),%eax\
+   0x0804958e <+58>:	mov    %eax,(%esp)\
+   0x08049591 <+61>:	call   0x8048900 <__isoc99_sscanf@plt>\
+   0x08049596 <+66>:	cmp    $0x5,%eax\
+=> 0x08049599 <+69>:	jg     0x80495a0 <read_six_numbers+76>\
+   0x0804959b <+71>:	call   0x8049515 <explode_bomb>\
+   0x080495a0 <+76>:	add    $0x2c,%esp\
+   0x080495a3 <+79>:	ret    \
+End of assembler dump.\
+(gdb) i r\
+eax            0x6	6\
+ecx            0x0	0\
+edx            0x0	0\
+ebx            0xffffcd24	-13020\
+esp            0xffffcc00	0xffffcc00\
+ebp            0xffffcc88	0xffffcc88\
+esi            0x0	0\
+edi            0x0	0\
+eip            0x8049599	0x8049599 <read_six_numbers+69>\
+eflags         0x202	[ IF ]\
+cs             0x23	35\
+ss             0x2b	43\
+ds             0x2b	43\
+es             0x2b	43\
+fs             0x0	0\
+gs             0x63	99\
+(gdb) x/s $eax\
+0x6:	<Address 0x6 out of bounds>\
+(gdb) x/d $eax\
+0x6:	Cannot access memory at address 0x6\
+(gdb) x/d 0x804a7a9\
+0x804a7a9:	37\
+(gdb) x/s 0x804a7a9\
+0x804a7a9:	"%d %d %d %d %d %d"\
+(gdb) i r\
+eax            0x6	6\
+ecx            0x0	0\
+edx            0x0	0\
+ebx            0xffffcd24	-13020\
+esp            0xffffcc00	0xffffcc00\
+ebp            0xffffcc88	0xffffcc88\
+esi            0x0	0\
+edi            0x0	0\
+eip            0x8049599	0x8049599 <read_six_numbers+69>\
+eflags         0x202	[ IF ]\
+cs             0x23	35\
+ss             0x2b	43\
+ds             0x2b	43\
+es             0x2b	43\
+fs             0x0	0\
+gs             0x63	99\
+(gdb) quit\
+A debugging session is active.\
+\
+	Inferior 1 [process 10927] will be killed.\
+\
+Quit anyway? (y or n) y\
+[rjg184@utility bomb178]$ clear\
+[3;J\
+[rjg184@utility bomb178]$ gdb bomb\
+GNU gdb (GDB) Red Hat Enterprise Linux 7.6.1-80.el7\
+Copyright (C) 2013 Free Software Foundation, Inc.\
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>\
+This is free software: you are free to change and redistribute it.\
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"\
+and "show warranty" for details.\
+This GDB was configured as "x86_64-redhat-linux-gnu".\
+For bug reporting instructions, please see:\
+<http://www.gnu.org/software/gdb/bugs/>...\
+Reading symbols from /.autofs/ilab/ilab_users/rjg184/assignment3/bomb178/bomb...done.\
+(gdb) break phase_4\
+Breakpoint 1 at 0x8048d8b\
+(gdb) run\
+Starting program: /.autofs/ilab/ilab_users/rjg184/assignment3/bomb178/bomb \
+Welcome to my fiendish little bomb. You have 9 phases with\
+which to blow yourself up. Have a nice day!\
+870\
+Phase 1 defused. How about the next one?\
+I turned the moon into something I call a Death Star.\
+That's number 2.  Keep going!\
+He is evil and fits easily into most overhead storaga bins.\
+One step closer.\
+1 2 3 4 5 6\
+\
+Breakpoint 1, 0x08048d8b in phase_4 ()\
+Missing separate debuginfos, use: debuginfo-install glibc-2.17-106.el7_2.8.i686\
+(gdb) disas\
+Dump of assembler code for function phase_4:\
+=> 0x08048d8b <+0>:	push   %esi\
+   0x08048d8c <+1>:	push   %ebx\
+   0x08048d8d <+2>:	sub    $0x34,%esp\
+   0x08048d90 <+5>:	lea    0x18(%esp),%eax\
+   0x08048d94 <+9>:	mov    %eax,0x4(%esp)\
+   0x08048d98 <+13>:	mov    0x40(%esp),%eax\
+   0x08048d9c <+17>:	mov    %eax,(%esp)\
+   0x08048d9f <+20>:	call   0x8049554 <read_six_numbers>\
+   0x08048da4 <+25>:	cmpl   $0x1,0x18(%esp)\
+   0x08048da9 <+30>:	je     0x8048dca <phase_4+63>\
+   0x08048dab <+32>:	call   0x8049515 <explode_bomb>\
+   0x08048db0 <+37>:	jmp    0x8048dca <phase_4+63>\
+   0x08048db2 <+39>:	mov    -0x4(%ebx),%eax\
+   0x08048db5 <+42>:	shl    $0x2,%eax\
+   0x08048db8 <+45>:	cmp    %eax,(%ebx)\
+   0x08048dba <+47>:	je     0x8048dc1 <phase_4+54>\
+   0x08048dbc <+49>:	call   0x8049515 <explode_bomb>\
+   0x08048dc1 <+54>:	add    $0x4,%ebx\
+   0x08048dc4 <+57>:	cmp    %esi,%ebx\
+   0x08048dc6 <+59>:	jne    0x8048db2 <phase_4+39>\
+   0x08048dc8 <+61>:	jmp    0x8048dd4 <phase_4+73>\
+   0x08048dca <+63>:	lea    0x1c(%esp),%ebx\
+   0x08048dce <+67>:	lea    0x30(%esp),%esi\
+   0x08048dd2 <+71>:	jmp    0x8048db2 <phase_4+39>\
+   0x08048dd4 <+73>:	add    $0x34,%esp\
+   0x08048dd7 <+76>:	pop    %ebx\
+   0x08048dd8 <+77>:	pop    %esi\
+   0x08048dd9 <+78>:	ret    \
+End of assembler dump.\
+(gdb) until *0x08048da4\
+0x08048da4 in phase_4 ()\
+(gdb) disas\
+Dump of assembler code for function phase_4:\
+   0x08048d8b <+0>:	push   %esi\
+   0x08048d8c <+1>:	push   %ebx\
+   0x08048d8d <+2>:	sub    $0x34,%esp\
+   0x08048d90 <+5>:	lea    0x18(%esp),%eax\
+   0x08048d94 <+9>:	mov    %eax,0x4(%esp)\
+   0x08048d98 <+13>:	mov    0x40(%esp),%eax\
+   0x08048d9c <+17>:	mov    %eax,(%esp)\
+   0x08048d9f <+20>:	call   0x8049554 <read_six_numbers>\
+=> 0x08048da4 <+25>:	cmpl   $0x1,0x18(%esp)\
+   0x08048da9 <+30>:	je     0x8048dca <phase_4+63>\
+   0x08048dab <+32>:	call   0x8049515 <explode_bomb>\
+   0x08048db0 <+37>:	jmp    0x8048dca <phase_4+63>\
+   0x08048db2 <+39>:	mov    -0x4(%ebx),%eax\
+   0x08048db5 <+42>:	shl    $0x2,%eax\
+   0x08048db8 <+45>:	cmp    %eax,(%ebx)\
+   0x08048dba <+47>:	je     0x8048dc1 <phase_4+54>\
+   0x08048dbc <+49>:	call   0x8049515 <explode_bomb>\
+   0x08048dc1 <+54>:	add    $0x4,%ebx\
+   0x08048dc4 <+57>:	cmp    %esi,%ebx\
+   0x08048dc6 <+59>:	jne    0x8048db2 <phase_4+39>\
+   0x08048dc8 <+61>:	jmp    0x8048dd4 <phase_4+73>\
+   0x08048dca <+63>:	lea    0x1c(%esp),%ebx\
+   0x08048dce <+67>:	lea    0x30(%esp),%esi\
+   0x08048dd2 <+71>:	jmp    0x8048db2 <phase_4+39>\
+   0x08048dd4 <+73>:	add    $0x34,%esp\
+   0x08048dd7 <+76>:	pop    %ebx\
+   0x08048dd8 <+77>:	pop    %esi\
+   0x08048dd9 <+78>:	ret    \
+End of assembler dump.\
+(gdb) i r\
+eax            0x6	6\
+ecx            0x0	0\
+edx            0x0	0\
+ebx            0xffffcd24	-13020\
+esp            0xffffcc30	0xffffcc30\
+ebp            0xffffcc88	0xffffcc88\
+esi            0x0	0\
+edi            0x0	0\
+eip            0x8048da4	0x8048da4 <phase_4+25>\
+eflags         0x282	[ SF IF ]\
+cs             0x23	35\
+ss             0x2b	43\
+ds             0x2b	43\
+es             0x2b	43\
+fs             0x0	0\
+gs             0x63	99\
+(gdb) x/s $esp+0x18\
+0xffffcc48:	"\\001"\
+(gdb) x/d $esp+0x18\
+0xffffcc48:	1\
+(gdb) ni\
+0x08048da9 in phase_4 ()\
+(gdb) i r\
+eax            0x6	6\
+ecx            0x0	0\
+edx            0x0	0\
+ebx            0xffffcd24	-13020\
+esp            0xffffcc30	0xffffcc30\
+ebp            0xffffcc88	0xffffcc88\
+esi            0x0	0\
+edi            0x0	0\
+eip            0x8048da9	0x8048da9 <phase_4+30>\
+eflags         0x246	[ PF ZF IF ]\
+cs             0x23	35\
+ss             0x2b	43\
+ds             0x2b	43\
+es             0x2b	43\
+fs             0x0	0\
+gs             0x63	99\
+(gdb) disas\
+Dump of assembler code for function phase_4:\
+   0x08048d8b <+0>:	push   %esi\
+   0x08048d8c <+1>:	push   %ebx\
+   0x08048d8d <+2>:	sub    $0x34,%esp\
+   0x08048d90 <+5>:	lea    0x18(%esp),%eax\
+   0x08048d94 <+9>:	mov    %eax,0x4(%esp)\
+   0x08048d98 <+13>:	mov    0x40(%esp),%eax\
+   0x08048d9c <+17>:	mov    %eax,(%esp)\
+   0x08048d9f <+20>:	call   0x8049554 <read_six_numbers>\
+   0x08048da4 <+25>:	cmpl   $0x1,0x18(%esp)\
+=> 0x08048da9 <+30>:	je     0x8048dca <phase_4+63>\
+   0x08048dab <+32>:	call   0x8049515 <explode_bomb>\
+   0x08048db0 <+37>:	jmp    0x8048dca <phase_4+63>\
+   0x08048db2 <+39>:	mov    -0x4(%ebx),%eax\
+   0x08048db5 <+42>:	shl    $0x2,%eax\
+   0x08048db8 <+45>:	cmp    %eax,(%ebx)\
+   0x08048dba <+47>:	je     0x8048dc1 <phase_4+54>\
+   0x08048dbc <+49>:	call   0x8049515 <explode_bomb>\
+   0x08048dc1 <+54>:	add    $0x4,%ebx\
+   0x08048dc4 <+57>:	cmp    %esi,%ebx\
+   0x08048dc6 <+59>:	jne    0x8048db2 <phase_4+39>\
+   0x08048dc8 <+61>:	jmp    0x8048dd4 <phase_4+73>\
+   0x08048dca <+63>:	lea    0x1c(%esp),%ebx\
+   0x08048dce <+67>:	lea    0x30(%esp),%esi\
+   0x08048dd2 <+71>:	jmp    0x8048db2 <phase_4+39>\
+   0x08048dd4 <+73>:	add    $0x34,%esp\
+   0x08048dd7 <+76>:	pop    %ebx\
+   0x08048dd8 <+77>:	pop    %esi\
+   0x08048dd9 <+78>:	ret    \
+End of assembler dump.\
+(gdb) x/d $eax+0x18\
+0x1e:	Cannot access memory at address 0x1e\
+(gdb) x/s $eax+0x18\
+0x1e:	<Address 0x1e out of bounds>\
+(gdb) ni\
+0x08048dca in phase_4 ()\
+(gdb) disas\
+Dump of assembler code for function phase_4:\
+   0x08048d8b <+0>:	push   %esi\
+   0x08048d8c <+1>:	push   %ebx\
+   0x08048d8d <+2>:	sub    $0x34,%esp\
+   0x08048d90 <+5>:	lea    0x18(%esp),%eax\
+   0x08048d94 <+9>:	mov    %eax,0x4(%esp)\
+   0x08048d98 <+13>:	mov    0x40(%esp),%eax\
+   0x08048d9c <+17>:	mov    %eax,(%esp)\
+   0x08048d9f <+20>:	call   0x8049554 <read_six_numbers>\
+   0x08048da4 <+25>:	cmpl   $0x1,0x18(%esp)\
+   0x08048da9 <+30>:	je     0x8048dca <phase_4+63>\
+   0x08048dab <+32>:	call   0x8049515 <explode_bomb>\
+   0x08048db0 <+37>:	jmp    0x8048dca <phase_4+63>\
+   0x08048db2 <+39>:	mov    -0x4(%ebx),%eax\
+   0x08048db5 <+42>:	shl    $0x2,%eax\
+   0x08048db8 <+45>:	cmp    %eax,(%ebx)\
+   0x08048dba <+47>:	je     0x8048dc1 <phase_4+54>\
+   0x08048dbc <+49>:	call   0x8049515 <explode_bomb>\
+   0x08048dc1 <+54>:	add    $0x4,%ebx\
+   0x08048dc4 <+57>:	cmp    %esi,%ebx\
+   0x08048dc6 <+59>:	jne    0x8048db2 <phase_4+39>\
+   0x08048dc8 <+61>:	jmp    0x8048dd4 <phase_4+73>\
+=> 0x08048dca <+63>:	lea    0x1c(%esp),%ebx\
+   0x08048dce <+67>:	lea    0x30(%esp),%esi\
+   0x08048dd2 <+71>:	jmp    0x8048db2 <phase_4+39>\
+   0x08048dd4 <+73>:	add    $0x34,%esp\
+   0x08048dd7 <+76>:	pop    %ebx\
+   0x08048dd8 <+77>:	pop    %esi\
+   0x08048dd9 <+78>:	ret    \
+End of assembler dump.\
+(gdb) i r\
+eax            0x6	6\
+ecx            0x0	0\
+edx            0x0	0\
+ebx            0xffffcd24	-13020\
+esp            0xffffcc30	0xffffcc30\
+ebp            0xffffcc88	0xffffcc88\
+esi            0x0	0\
+edi            0x0	0\
+eip            0x8048dca	0x8048dca <phase_4+63>\
+eflags         0x246	[ PF ZF IF ]\
+cs             0x23	35\
+ss             0x2b	43\
+ds             0x2b	43\
+es             0x2b	43\
+fs             0x0	0\
+gs             0x63	99\
+(gdb) x/s $esp+0x1c\
+0xffffcc4c:	"\\002"\
+(gdb) x/d $esp+0x1c\
+0xffffcc4c:	2\
+(gdb) x/d $ebx\
+0xffffcd24:	2\
+(gdb) ni\
+0x08048dce in phase_4 ()\
+(gdb) disas\
+Dump of assembler code for function phase_4:\
+   0x08048d8b <+0>:	push   %esi\
+   0x08048d8c <+1>:	push   %ebx\
+   0x08048d8d <+2>:	sub    $0x34,%esp\
+   0x08048d90 <+5>:	lea    0x18(%esp),%eax\
+   0x08048d94 <+9>:	mov    %eax,0x4(%esp)\
+   0x08048d98 <+13>:	mov    0x40(%esp),%eax\
+   0x08048d9c <+17>:	mov    %eax,(%esp)\
+   0x08048d9f <+20>:	call   0x8049554 <read_six_numbers>\
+   0x08048da4 <+25>:	cmpl   $0x1,0x18(%esp)\
+   0x08048da9 <+30>:	je     0x8048dca <phase_4+63>\
+   0x08048dab <+32>:	call   0x8049515 <explode_bomb>\
+   0x08048db0 <+37>:	jmp    0x8048dca <phase_4+63>\
+   0x08048db2 <+39>:	mov    -0x4(%ebx),%eax\
+   0x08048db5 <+42>:	shl    $0x2,%eax\
+   0x08048db8 <+45>:	cmp    %eax,(%ebx)\
+   0x08048dba <+47>:	je     0x8048dc1 <phase_4+54>\
+   0x08048dbc <+49>:	call   0x8049515 <explode_bomb>\
+   0x08048dc1 <+54>:	add    $0x4,%ebx\
+   0x08048dc4 <+57>:	cmp    %esi,%ebx\
+   0x08048dc6 <+59>:	jne    0x8048db2 <phase_4+39>\
+   0x08048dc8 <+61>:	jmp    0x8048dd4 <phase_4+73>\
+   0x08048dca <+63>:	lea    0x1c(%esp),%ebx\
+=> 0x08048dce <+67>:	lea    0x30(%esp),%esi\
+   0x08048dd2 <+71>:	jmp    0x8048db2 <phase_4+39>\
+   0x08048dd4 <+73>:	add    $0x34,%esp\
+   0x08048dd7 <+76>:	pop    %ebx\
+   0x08048dd8 <+77>:	pop    %esi\
+   0x08048dd9 <+78>:	ret    \
+End of assembler dump.\
+(gdb) i r\
+eax            0x6	6\
+ecx            0x0	0\
+edx            0x0	0\
+ebx            0xffffcc4c	-13236\
+esp            0xffffcc30	0xffffcc30\
+ebp            0xffffcc88	0xffffcc88\
+esi            0x0	0\
+edi            0x0	0\
+eip            0x8048dce	0x8048dce <phase_4+67>\
+eflags         0x246	[ PF ZF IF ]\
+cs             0x23	35\
+ss             0x2b	43\
+ds             0x2b	43\
+es             0x2b	43\
+fs             0x0	0\
+gs             0x63	99\
+(gdb) x/d $esp+0x30\
+0xffffcc60:	36\
+(gdb) x/d $esi\
+0x0:	Cannot access memory at address 0x0\
+(gdb) x/s $esi\
+0x0:	<Address 0x0 out of bounds>\
+(gdb) ni\
+0x08048dd2 in phase_4 ()\
+(gdb) disas\
+Dump of assembler code for function phase_4:\
+   0x08048d8b <+0>:	push   %esi\
+   0x08048d8c <+1>:	push   %ebx\
+   0x08048d8d <+2>:	sub    $0x34,%esp\
+   0x08048d90 <+5>:	lea    0x18(%esp),%eax\
+   0x08048d94 <+9>:	mov    %eax,0x4(%esp)\
+   0x08048d98 <+13>:	mov    0x40(%esp),%eax\
+   0x08048d9c <+17>:	mov    %eax,(%esp)\
+   0x08048d9f <+20>:	call   0x8049554 <read_six_numbers>\
+   0x08048da4 <+25>:	cmpl   $0x1,0x18(%esp)\
+   0x08048da9 <+30>:	je     0x8048dca <phase_4+63>\
+   0x08048dab <+32>:	call   0x8049515 <explode_bomb>\
+   0x08048db0 <+37>:	jmp    0x8048dca <phase_4+63>\
+   0x08048db2 <+39>:	mov    -0x4(%ebx),%eax\
+   0x08048db5 <+42>:	shl    $0x2,%eax\
+   0x08048db8 <+45>:	cmp    %eax,(%ebx)\
+   0x08048dba <+47>:	je     0x8048dc1 <phase_4+54>\
+   0x08048dbc <+49>:	call   0x8049515 <explode_bomb>\
+   0x08048dc1 <+54>:	add    $0x4,%ebx\
+   0x08048dc4 <+57>:	cmp    %esi,%ebx\
+   0x08048dc6 <+59>:	jne    0x8048db2 <phase_4+39>\
+   0x08048dc8 <+61>:	jmp    0x8048dd4 <phase_4+73>\
+   0x08048dca <+63>:	lea    0x1c(%esp),%ebx\
+   0x08048dce <+67>:	lea    0x30(%esp),%esi\
+=> 0x08048dd2 <+71>:	jmp    0x8048db2 <phase_4+39>\
+   0x08048dd4 <+73>:	add    $0x34,%esp\
+   0x08048dd7 <+76>:	pop    %ebx\
+   0x08048dd8 <+77>:	pop    %esi\
+   0x08048dd9 <+78>:	ret    \
+End of assembler dump.\
+(gdb) i r\
+eax            0x6	6\
+ecx            0x0	0\
+edx            0x0	0\
+ebx            0xffffcc4c	-13236\
+esp            0xffffcc30	0xffffcc30\
+ebp            0xffffcc88	0xffffcc88\
+esi            0xffffcc60	-13216\
+edi            0x0	0\
+eip            0x8048dd2	0x8048dd2 <phase_4+71>\
+eflags         0x246	[ PF ZF IF ]\
+cs             0x23	35\
+ss             0x2b	43\
+ds             0x2b	43\
+es             0x2b	43\
+fs             0x0	0\
+gs             0x63	99\
+(gdb) x/d -13216\
+0xffffcc60:	36\
+(gdb) ni\
+0x08048db2 in phase_4 ()\
+(gdb) i r\
+eax            0x6	6\
+ecx            0x0	0\
+edx            0x0	0\
+ebx            0xffffcc4c	-13236\
+esp            0xffffcc30	0xffffcc30\
+ebp            0xffffcc88	0xffffcc88\
+esi            0xffffcc60	-13216\
+edi            0x0	0\
+eip            0x8048db2	0x8048db2 <phase_4+39>\
+eflags         0x246	[ PF ZF IF ]\
+cs             0x23	35\
+ss             0x2b	43\
+ds             0x2b	43\
+es             0x2b	43\
+fs             0x0	0\
+gs             0x63	99\
+(gdb) disas\
+Dump of assembler code for function phase_4:\
+   0x08048d8b <+0>:	push   %esi\
+   0x08048d8c <+1>:	push   %ebx\
+   0x08048d8d <+2>:	sub    $0x34,%esp\
+   0x08048d90 <+5>:	lea    0x18(%esp),%eax\
+   0x08048d94 <+9>:	mov    %eax,0x4(%esp)\
+   0x08048d98 <+13>:	mov    0x40(%esp),%eax\
+   0x08048d9c <+17>:	mov    %eax,(%esp)\
+   0x08048d9f <+20>:	call   0x8049554 <read_six_numbers>\
+   0x08048da4 <+25>:	cmpl   $0x1,0x18(%esp)\
+   0x08048da9 <+30>:	je     0x8048dca <phase_4+63>\
+   0x08048dab <+32>:	call   0x8049515 <explode_bomb>\
+   0x08048db0 <+37>:	jmp    0x8048dca <phase_4+63>\
+=> 0x08048db2 <+39>:	mov    -0x4(%ebx),%eax\
+   0x08048db5 <+42>:	shl    $0x2,%eax\
+   0x08048db8 <+45>:	cmp    %eax,(%ebx)\
+   0x08048dba <+47>:	je     0x8048dc1 <phase_4+54>\
+   0x08048dbc <+49>:	call   0x8049515 <explode_bomb>\
+   0x08048dc1 <+54>:	add    $0x4,%ebx\
+   0x08048dc4 <+57>:	cmp    %esi,%ebx\
+   0x08048dc6 <+59>:	jne    0x8048db2 <phase_4+39>\
+   0x08048dc8 <+61>:	jmp    0x8048dd4 <phase_4+73>\
+   0x08048dca <+63>:	lea    0x1c(%esp),%ebx\
+   0x08048dce <+67>:	lea    0x30(%esp),%esi\
+   0x08048dd2 <+71>:	jmp    0x8048db2 <phase_4+39>\
+   0x08048dd4 <+73>:	add    $0x34,%esp\
+   0x08048dd7 <+76>:	pop    %ebx\
+   0x08048dd8 <+77>:	pop    %esi\
+   0x08048dd9 <+78>:	ret    \
+End of assembler dump.\
+(gdb) i r\
+eax            0x6	6\
+ecx            0x0	0\
+edx            0x0	0\
+ebx            0xffffcc4c	-13236\
+esp            0xffffcc30	0xffffcc30\
+ebp            0xffffcc88	0xffffcc88\
+esi            0xffffcc60	-13216\
+edi            0x0	0\
+eip            0x8048db2	0x8048db2 <phase_4+39>\
+eflags         0x246	[ PF ZF IF ]\
+cs             0x23	35\
+ss             0x2b	43\
+ds             0x2b	43\
+es             0x2b	43\
+fs             0x0	0\
+gs             0x63	99\
+(gdb) x/d $ebx-0x4\
+0xffffcc48:	1\
+(gdb) disas\
+Dump of assembler code for function phase_4:\
+   0x08048d8b <+0>:	push   %esi\
+   0x08048d8c <+1>:	push   %ebx\
+   0x08048d8d <+2>:	sub    $0x34,%esp\
+   0x08048d90 <+5>:	lea    0x18(%esp),%eax\
+   0x08048d94 <+9>:	mov    %eax,0x4(%esp)\
+   0x08048d98 <+13>:	mov    0x40(%esp),%eax\
+   0x08048d9c <+17>:	mov    %eax,(%esp)\
+   0x08048d9f <+20>:	call   0x8049554 <read_six_numbers>\
+   0x08048da4 <+25>:	cmpl   $0x1,0x18(%esp)\
+   0x08048da9 <+30>:	je     0x8048dca <phase_4+63>\
+   0x08048dab <+32>:	call   0x8049515 <explode_bomb>\
+   0x08048db0 <+37>:	jmp    0x8048dca <phase_4+63>\
+=> 0x08048db2 <+39>:	mov    -0x4(%ebx),%eax\
+   0x08048db5 <+42>:	shl    $0x2,%eax\
+   0x08048db8 <+45>:	cmp    %eax,(%ebx)\
+   0x08048dba <+47>:	je     0x8048dc1 <phase_4+54>\
+   0x08048dbc <+49>:	call   0x8049515 <explode_bomb>\
+   0x08048dc1 <+54>:	add    $0x4,%ebx\
+   0x08048dc4 <+57>:	cmp    %esi,%ebx\
+   0x08048dc6 <+59>:	jne    0x8048db2 <phase_4+39>\
+   0x08048dc8 <+61>:	jmp    0x8048dd4 <phase_4+73>\
+   0x08048dca <+63>:	lea    0x1c(%esp),%ebx\
+   0x08048dce <+67>:	lea    0x30(%esp),%esi\
+   0x08048dd2 <+71>:	jmp    0x8048db2 <phase_4+39>\
+   0x08048dd4 <+73>:	add    $0x34,%esp\
+   0x08048dd7 <+76>:	pop    %ebx\
+   0x08048dd8 <+77>:	pop    %esi\
+   0x08048dd9 <+78>:	ret    \
+End of assembler dump.\
+(gdb) ni\
+0x08048db5 in phase_4 ()\
+(gdb) disas\
+Dump of assembler code for function phase_4:\
+   0x08048d8b <+0>:	push   %esi\
+   0x08048d8c <+1>:	push   %ebx\
+   0x08048d8d <+2>:	sub    $0x34,%esp\
+   0x08048d90 <+5>:	lea    0x18(%esp),%eax\
+   0x08048d94 <+9>:	mov    %eax,0x4(%esp)\
+   0x08048d98 <+13>:	mov    0x40(%esp),%eax\
+   0x08048d9c <+17>:	mov    %eax,(%esp)\
+   0x08048d9f <+20>:	call   0x8049554 <read_six_numbers>\
+   0x08048da4 <+25>:	cmpl   $0x1,0x18(%esp)\
+   0x08048da9 <+30>:	je     0x8048dca <phase_4+63>\
+   0x08048dab <+32>:	call   0x8049515 <explode_bomb>\
+   0x08048db0 <+37>:	jmp    0x8048dca <phase_4+63>\
+   0x08048db2 <+39>:	mov    -0x4(%ebx),%eax\
+=> 0x08048db5 <+42>:	shl    $0x2,%eax\
+   0x08048db8 <+45>:	cmp    %eax,(%ebx)\
+   0x08048dba <+47>:	je     0x8048dc1 <phase_4+54>\
+   0x08048dbc <+49>:	call   0x8049515 <explode_bomb>\
+   0x08048dc1 <+54>:	add    $0x4,%ebx\
+   0x08048dc4 <+57>:	cmp    %esi,%ebx\
+   0x08048dc6 <+59>:	jne    0x8048db2 <phase_4+39>\
+   0x08048dc8 <+61>:	jmp    0x8048dd4 <phase_4+73>\
+   0x08048dca <+63>:	lea    0x1c(%esp),%ebx\
+   0x08048dce <+67>:	lea    0x30(%esp),%esi\
+   0x08048dd2 <+71>:	jmp    0x8048db2 <phase_4+39>\
+   0x08048dd4 <+73>:	add    $0x34,%esp\
+   0x08048dd7 <+76>:	pop    %ebx\
+   0x08048dd8 <+77>:	pop    %esi\
+   0x08048dd9 <+78>:	ret    \
+End of assembler dump.\
+(gdb) i r\
+eax            0x1	1\
+ecx            0x0	0\
+edx            0x0	0\
+ebx            0xffffcc4c	-13236\
+esp            0xffffcc30	0xffffcc30\
+ebp            0xffffcc88	0xffffcc88\
+esi            0xffffcc60	-13216\
+edi            0x0	0\
+eip            0x8048db5	0x8048db5 <phase_4+42>\
+eflags         0x246	[ PF ZF IF ]\
+cs             0x23	35\
+ss             0x2b	43\
+ds             0x2b	43\
+es             0x2b	43\
+fs             0x0	0\
+gs             0x63	99\
+(gdb) ni\
+0x08048db8 in phase_4 ()\
+(gdb) i r\
+eax            0x4	4\
+ecx            0x0	0\
+edx            0x0	0\
+ebx            0xffffcc4c	-13236\
+esp            0xffffcc30	0xffffcc30\
+ebp            0xffffcc88	0xffffcc88\
+esi            0xffffcc60	-13216\
+edi            0x0	0\
+eip            0x8048db8	0x8048db8 <phase_4+45>\
+eflags         0x202	[ IF ]\
+cs             0x23	35\
+ss             0x2b	43\
+ds             0x2b	43\
+es             0x2b	43\
+fs             0x0	0\
+gs             0x63	99\
+(gdb) ni\
+0x08048dba in phase_4 ()\
+(gdb) disas\
+Dump of assembler code for function phase_4:\
+   0x08048d8b <+0>:	push   %esi\
+   0x08048d8c <+1>:	push   %ebx\
+   0x08048d8d <+2>:	sub    $0x34,%esp\
+   0x08048d90 <+5>:	lea    0x18(%esp),%eax\
+   0x08048d94 <+9>:	mov    %eax,0x4(%esp)\
+   0x08048d98 <+13>:	mov    0x40(%esp),%eax\
+   0x08048d9c <+17>:	mov    %eax,(%esp)\
+   0x08048d9f <+20>:	call   0x8049554 <read_six_numbers>\
+   0x08048da4 <+25>:	cmpl   $0x1,0x18(%esp)\
+   0x08048da9 <+30>:	je     0x8048dca <phase_4+63>\
+   0x08048dab <+32>:	call   0x8049515 <explode_bomb>\
+   0x08048db0 <+37>:	jmp    0x8048dca <phase_4+63>\
+   0x08048db2 <+39>:	mov    -0x4(%ebx),%eax\
+   0x08048db5 <+42>:	shl    $0x2,%eax\
+   0x08048db8 <+45>:	cmp    %eax,(%ebx)\
+=> 0x08048dba <+47>:	je     0x8048dc1 <phase_4+54>\
+   0x08048dbc <+49>:	call   0x8049515 <explode_bomb>\
+   0x08048dc1 <+54>:	add    $0x4,%ebx\
+   0x08048dc4 <+57>:	cmp    %esi,%ebx\
+   0x08048dc6 <+59>:	jne    0x8048db2 <phase_4+39>\
+   0x08048dc8 <+61>:	jmp    0x8048dd4 <phase_4+73>\
+   0x08048dca <+63>:	lea    0x1c(%esp),%ebx\
+   0x08048dce <+67>:	lea    0x30(%esp),%esi\
+   0x08048dd2 <+71>:	jmp    0x8048db2 <phase_4+39>\
+   0x08048dd4 <+73>:	add    $0x34,%esp\
+   0x08048dd7 <+76>:	pop    %ebx\
+   0x08048dd8 <+77>:	pop    %esi\
+   0x08048dd9 <+78>:	ret    \
+End of assembler dump.\
+(gdb) i r\
+eax            0x4	4\
+ecx            0x0	0\
+edx            0x0	0\
+ebx            0xffffcc4c	-13236\
+esp            0xffffcc30	0xffffcc30\
+ebp            0xffffcc88	0xffffcc88\
+esi            0xffffcc60	-13216\
+edi            0x0	0\
+eip            0x8048dba	0x8048dba <phase_4+47>\
+eflags         0x293	[ CF AF SF IF ]\
+cs             0x23	35\
+ss             0x2b	43\
+ds             0x2b	43\
+es             0x2b	43\
+fs             0x0	0\
+gs             0x63	99\
+(gdb) x/d -13236\
+0xffffcc4c:	2\
+(gdb) \
+}

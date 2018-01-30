@@ -1,0 +1,86 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf470
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww28600\viewh18000\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 (gdb) break phase_1\
+Breakpoint 1 at 0x8048c80\
+(gdb) run\
+Starting program: /.autofs/ilab/ilab_users/rjg184/assignment3/bomb178/bomb \
+Welcome to my fiendish little bomb. You have 9 phases with\
+which to blow yourself up. Have a nice day!\
+test string\
+\
+Breakpoint 1, 0x08048c80 in phase_1 ()\
+Missing separate debuginfos, use: debuginfo-install glibc-2.17-106.el7_2.8.i686\
+(gdb) disas\
+Dump of assembler code for function phase_1:\
+=> 0x08048c80 <+0>:	sub    $0x2c,%esp\
+   0x08048c83 <+3>:	movl   $0x0,0x1c(%esp)\
+   0x08048c8b <+11>:	lea    0x1c(%esp),%eax\
+   0x08048c8f <+15>:	mov    %eax,0x8(%esp)\
+   0x08048c93 <+19>:	movl   $0x804a7b8,0x4(%esp)\
+   0x08048c9b <+27>:	mov    0x30(%esp),%eax\
+   0x08048c9f <+31>:	mov    %eax,(%esp)\
+   0x08048ca2 <+34>:	call   0x8048900 <__isoc99_sscanf@plt>\
+   0x08048ca7 <+39>:	cmp    $0x1,%eax\
+   0x08048caa <+42>:	je     0x8048cb1 <phase_1+49>\
+   0x08048cac <+44>:	call   0x8049515 <explode_bomb>\
+   0x08048cb1 <+49>:	cmpl   $0x366,0x1c(%esp)\
+   0x08048cb9 <+57>:	je     0x8048cc0 <phase_1+64>\
+   0x08048cbb <+59>:	call   0x8049515 <explode_bomb>\
+   0x08048cc0 <+64>:	add    $0x2c,%esp\
+   0x08048cc3 <+67>:	ret    \
+End of assembler dump.\
+\
+ - \'97 \'97 - - - - - - - \'97\'97  \'97\'97\'97 \'97\'97\'97 \
+\
+(gdb) run\
+Starting program: /.autofs/ilab/ilab_users/rjg184/assignment3/bomb178/bomb \
+Welcome to my fiendish little bomb. You have 9 phases with\
+which to blow yourself up. Have a nice day!\
+25\
+\
+Breakpoint 1, 0x08048c80 in phase_1 ()\
+Missing separate debuginfos, use: debuginfo-install glibc-2.17-106.el7_2.8.i686\
+(gdb) disas\
+Dump of assembler code for function phase_1:\
+=> 0x08048c80 <+0>:	sub    $0x2c,%esp                			<\'97 \'930x2c\'94 = 44 \'97> [ esp = esp - 44 ] \'97 esp = 124 -> esp = 124-44 = 80\
+   0x08048c83 <+3>:	movl   $0x0,0x1c(%esp)       			<\'97 \'930x1c\'94 = 28 \'97> [ copy 0 into esp+28 ]  \'97 esp+28 = 0\
+   0x08048c8b <+11>:	lea    0x1c(%esp),%eax        			<\'97 \'930x1c(%esp)\'94 = %esp + 28 \'97> [ eax = esp+28 ]  \'97 eax = 0\
+   0x08048c8f <+15>:	mov    %eax,0x8(%esp)	   			<\'97 \'930x8(%esp)\'94 = esp + 8 \'97> [ copy eax into esp+8 ] \'97 esp+8 = 0\
+   0x08048c93 <+19>:	movl   $0x804a7b8,0x4(%esp)			<\'97 \'93$0x804a7b8\'94 = %d \'97> [copy $0x804a7b8 into esp+4 ] \'97 esp+4 = %d\
+   0x08048c9b <+27>:	mov    0x30(%esp),%eax				<\'97 \'930x30(%esp)\'94 = esp+48 \'97> [ copy esp+48 into eax ] \'97 eax = %d\
+   0x08048c9f <+31>:	mov    %eax,(%esp)					<\'97 [ copy eax into esp ] \'97 esp = %d\
+   0x08048ca2 <+34>:	call   0x8048900 <__isoc99_sscanf@plt>	<\'97 \
+   0x08048ca7 <+39>:	cmp    $0x1,%eax					<\'97 [ compare 1 and eax ] \'97 \
+   0x08048caa <+42>:	je     0x8048cb1 <phase_1+49>			<\'97 [ if 1 EQUALS eax, then jump to 49 ]\
+   0x08048cac <+44>:	call   0x8049515 <explode_bomb>		<\'97 [ otherwise explode bomb ]\
+   0x08048cb1 <+49>:	cmpl   $0x366,0x1c(%esp)				<\'97 \'930x366\'94 = 870 \'97> [ compare 870 and esp+28 ] \'97 esp+28 = 870\
+   0x08048cb9 <+57>:	je     0x8048cc0 <phase_1+64>			<\'97 [ if 870 EQUALS esp+28, then jump to 64]\
+   0x08048cbb <+59>:	call   0x8049515 <explode_bomb>		<\'97 [ otherwise explode bomb ]\
+   0x08048cc0 <+64>:	add    $0x2c,%esp					<\'97 \'930x2c\'94 = 44 \'97> [ esp = esp + 44 ] \'97 esp = 28, so \
+   0x08048cc3 <+67>:	ret    							<\'97 end\
+End of assembler dump.\
+\
+\'97> EXTRA (HELPFUL):\
+\
+08048900 <__isoc99_sscanf@plt>:\
+ 8048900:	ff 25 58 d0 04 08    	jmp    *0x804d058\
+ 8048906:	68 98 00 00 00       	push   $0x98\
+ 804890b:	e9 b0 fe ff ff       	jmp    80487c0 <_init+0x30>\
+\
+08049515 <explode_bomb>:\
+ 8049515:	83 ec 1c             	sub    $0x1c,%esp\
+ 8049518:	c7 04 24 89 a7 04 08 	movl   $0x804a789,(%esp)\
+ 804951f:	e8 5c f3 ff ff       	call   8048880 <puts@plt>\
+ 8049524:	c7 04 24 92 a7 04 08 	movl   $0x804a792,(%esp)\
+ 804952b:	e8 50 f3 ff ff       	call   8048880 <puts@plt>\
+ 8049530:	c7 04 24 00 00 00 00 	movl   $0x0,(%esp)\
+ 8049537:	e8 cb fe ff ff       	call   8049407 <send_msg>\
+ 804953c:	c7 04 24 a0 a6 04 08 	movl   $0x804a6a0,(%esp)\
+ 8049543:	e8 38 f3 ff ff       	call   8048880 <puts@plt>\
+ 8049548:	c7 04 24 08 00 00 00 	movl   $0x8,(%esp)\
+ 804954f:	e8 6c f3 ff ff       	call   80488c0 <exit@plt>\
+}
